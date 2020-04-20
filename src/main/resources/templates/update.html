@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/student}" method="post"><br>
+          <input type="hidden" name="_method" value="put"/><br>
+     <input type="text" name="sid" th:value="${student.sid}"/><br>
+     <input type="text" name="sname" th:value="${student.sname}"/><br>
+     <input type="text" name="age"   th:value="${student.age}"/><br>
+     <input type="text" name="birthday" 
+        th:value="${#dates.format (student.birthday,'yyyy-MM-dd')}"/><br>
+       <select name="classa.cid">
+             <option th:each="class:${classa}" th:value="${class.cid}"
+             th:selected="${class.cid==student.classa.cid}">
+                  [[${class.cname}]]
+             </option>
+       </select><br>
+       <input type="submit" name="update"/><br>
+ </form>
+</body>
+</body>
+</html>

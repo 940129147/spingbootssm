@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/student}" method="post"><br>
+     <input type="text" name="sid"/><br>
+     <input type="text" name="sname"/><br>
+      <input type="text" name="age"/><br>
+     <input type="text" name="birthday"/><br>
+       <select name="classa.cid">
+             <option th:each="class:${classa}" th:value="${class.cid}">
+                  [[${class.cname}]]
+             </option>
+       </select><br>
+       <input type="submit" name="studentAdd"/><br>
+ </form>
+</body>
+</body>
+</html>

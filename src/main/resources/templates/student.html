@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" th:src="@{/JS/jquery.min.js}"></script>
+<script type="text/javascript">
+ $(function(){
+	   $(".de").click(function(){
+		   $("#deStudent").attr("action",$(this).attr("dsid")).submit();
+	   });
+ });
+
+</script>
+</head>
+<body>
+<table>
+<tr>
+  <td>学号</td>
+  <td>姓名</td>
+  <td>年龄</td>
+  <td>生日</td>
+  <td>班级</td>
+  <td>操作</td>
+<tr>
+
+<tr th:each="student:${students}">
+  <td th:text="${student.sid}"></td>
+  <td>[[${student.sname}]]</td>
+  <td>[[${student.age}]]</td>
+  <td>[[${#dates.format (student.birthday,"yyyy-MM-dd")}]]</td>
+  <td>[[${student.classa.cname}]]</td>
+  <td>
+  <a th:href="@{/student/}+${student.sid}">修改学生</a>
+  <a href="#" class="de" th:attr="dsid=@{/student/}+${student.sid}">删除学生</a>
+  </td>
+<tr>
+</table>
+
+
+<form method="post" id="deStudent">
+ <input type="hidden"name="_method" value="delete">
+</form>
+
+
+<a th:href="@{/student}">添加学生</a>
+
+
+</body>
+</html>

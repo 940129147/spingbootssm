@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.springboot.mapper.StudentMapper">
+<!-- 添加学生 -->
+ <insert id="insertStudent">
+ insert into student values(#{sid},#{sname},#{age},#{birthday},#{classa.cid})
+ </insert>
+ 
+ 
+ 
+ <select id="queryStudents" resultMap="queryMapper">
+        select * from student s,classa c where s.cid=c.cid
+ </select>
+ 
+ <resultMap type="Student" id="queryMapper">
+   <id column="sid" property="sid"/>
+   <result column="sname" property="sname"/>
+   <result column="age" property="age"/>
+   <result column="birthday" property="birthday"/>
+   <association property="classa" javaType="Classa">
+       <id column="cid" property="cid"/>
+       <result column="cname" property="cname"/>
+   </association>
+ </resultMap>
+ 
+ <!-- 查单人 -->
+ <select id="queryStudent" resultMap="qMapper">
+        select * from student s,classa c where s.cid=c.cid  and s.sid=#{sid}
+ </select>
+ 
+ <resultMap type="Student" id="qMapper">
+   <id column="sid" property="sid"/>
+   <result column="sname" property="sname"/>
+   <result column="age" property="age"/>
+   <result column="birthday" property="birthday"/>
+   <association property="classa" javaType="Classa">
+       <id column="cid" property="cid"/>
+       <result column="cname" property="cname"/>
+   </association>
+ </resultMap>
+ 
+ <!-- 改学生 -->
+<update id="updateStudent">
+update student set sid=#{sid},sname=#{sname},age=#{age},birthday=#{birthday},
+cid=#{classa.cid} where sid=#{sid}
+</update>
+ 
+ 
+ 
+ 
+ <!-- 查班级 -->
+ <select id="queryClassa" resultType="Classa">
+      select * from classa 
+ </select>
+ 
+ <!-- 删除学生 -->
+ <delete id="deleteStudent">
+         delete from student where sid=#{sid}
+ </delete>
+</mapper>
